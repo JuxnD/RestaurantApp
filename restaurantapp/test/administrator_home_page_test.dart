@@ -84,15 +84,15 @@ void main() {
   ) async {
     await tester.pumpWidget(buildSubject());
 
-    await tester.tap(find.text('Predicción IA'));
+    await tester.tap(find.text('Estadísticas'));
     await tester.pumpAndSettle();
 
     expect(
       tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
       3,
     );
-    expect(find.text('Predicción IA'), findsOneWidget);
-    expect(find.textContaining('disponible en el panel web'), findsOneWidget);
+    expect(find.text('Estadísticas'), findsAtLeastNWidgets(1));
+    expect(find.textContaining('disponibles en el panel web'), findsOneWidget);
   });
 
   testWidgets('filtra pedidos y permite crear un producto en inventario', (

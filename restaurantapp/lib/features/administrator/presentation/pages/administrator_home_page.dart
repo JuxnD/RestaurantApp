@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'statistics_page.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -163,12 +164,12 @@ class _AdministratorHomePageState extends State<AdministratorHomePage> {
   }
 
   Future<void> _selectTab(int index) async {
-    if (index == 1 && widget.orderRepository != null) {
+    if ((index == 0 || index == 1 || index == 3) && widget.orderRepository != null) {
       try {
         await widget.orderRepository!.load();
         if (!mounted) return;
         final dashboard = widget.getDashboard();
-        setState(() => _orders = [...dashboard.orders]);
+        setState(() { _orders = [...dashboard.orders]; _metrics = dashboard.metrics; });
       } catch (error) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -615,15 +616,7 @@ class _AdministratorHomePageState extends State<AdministratorHomePage> {
               onDelete: _deleteProduct,
               onAvailabilityChanged: _updateAvailability,
             ),
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.all(24),
-                child: Text(
-                  'La predicción de categoría está disponible en el panel web.',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+            StatisticsPage(orders: widget.orderRepository?.getOrders() ?? const []),
             _ProfileTab(
               user: widget.user,
               onLogout: widget.onLogout != null
@@ -663,9 +656,9 @@ class _AdministratorHomePageState extends State<AdministratorHomePage> {
               label: 'Inventario',
             ),
             NavigationDestination(
-              icon: Icon(Icons.psychology_outlined),
-              selectedIcon: Icon(Icons.psychology),
-              label: 'Predicción IA',
+              icon: Icon(Icons.bar_chart_outlined),
+              selectedIcon: Icon(Icons.bar_chart),
+              label: 'Estadísticas',
             ),
             NavigationDestination(
               icon: Icon(Icons.person_outline),
