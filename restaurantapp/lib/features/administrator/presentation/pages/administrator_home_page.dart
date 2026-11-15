@@ -1,5 +1,9 @@
 import 'dart:typed_data';
 import 'statistics_page.dart';
+import 'demand_page.dart';
+import '../../data/repositories/demand_repository.dart';
+import '../../../../core/network/http_client_service.dart';
+import '../../../../core/session/session_manager.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -616,7 +620,13 @@ class _AdministratorHomePageState extends State<AdministratorHomePage> {
               onDelete: _deleteProduct,
               onAvailabilityChanged: _updateAvailability,
             ),
-            StatisticsPage(orders: widget.orderRepository?.getOrders() ?? const []),
+            StatisticsPage(orders: widget.orderRepository?.getOrders() ?? const [],
+              onOpenDemand: widget.user.role.canOperateRestaurant ? () async {
+                final session = await SessionManager.getInstance();
+                if (!context.mounted) return;
+                Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => DemandPage(
+                  repository: DemandRepository(HttpClientService(sessionManager: session)))));
+              } : null),
             _ProfileTab(
               user: widget.user,
               onLogout: widget.onLogout != null

@@ -1,0 +1,40 @@
+{
+  "apkSha256": "70efa55da35a942d8032e745d0add04896185313ec7f915f6f82c381e9612bfc",
+  "roles": {
+    "cliente": 403,
+    "cocina": 200,
+    "admin": 200,
+    "gerente": 403
+  },
+  "predictions": [
+    {
+      "product": "Alitas BBQ",
+      "units": 28.0689567060883,
+      "expected": 28.068956706088294
+    },
+    {
+      "product": "Burrito",
+      "units": 35.2092707028596,
+      "expected": 35.2092707028596
+    },
+    {
+      "product": "Ensalada",
+      "units": 27.413743291181923,
+      "expected": 27.41374329118192
+    },
+    {
+      "product": "Hamburguesa",
+      "units": 45.27287608318317,
+      "expected": 45.27287608318317
+    },
+    {
+      "product": "Pizza",
+      "units": 32.975566526428096,
+      "expected": 32.975566526428096
+    }
+  ],
+  "invalidHistoryRejected": true,
+  "nativePredictionRuns": 3,
+  "nativeOfflineErrorAndRecovery": true,
+  "nativeCacheAfterRestart": true
+}

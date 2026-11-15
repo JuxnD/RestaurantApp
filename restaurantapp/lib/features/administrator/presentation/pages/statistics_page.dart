@@ -56,8 +56,9 @@ class SalesSummary {
 }
 
 class StatisticsPage extends StatelessWidget {
-  const StatisticsPage({super.key, required this.orders});
+  const StatisticsPage({super.key, required this.orders, this.onOpenDemand});
   final List<CustomerOrder> orders;
+  final VoidCallback? onOpenDemand;
   @override
   Widget build(BuildContext context) {
     final summary = SalesSummary(orders);
@@ -74,6 +75,11 @@ class StatisticsPage extends StatelessWidget {
           'Pedidos cargados de este restaurante. Las ventas incluyen pagos confirmados y excluyen cancelados.',
         ),
         const SizedBox(height: 18),
+        if (onOpenDemand != null) ...[
+          OutlinedButton.icon(onPressed: onOpenDemand, icon: const Icon(Icons.auto_graph),
+            label: const Text('Predicción de demanda · IA')),
+          const SizedBox(height: 12),
+        ],
         Text(
           formatCop(summary.total),
           style: AppTheme.serif(fontSize: 32, fontWeight: FontWeight.bold),
@@ -219,7 +225,7 @@ class _SalesLine extends CustomPainter {
       );
       final label = max * fraction >= 1000
           ? '${(max * fraction / 1000).toStringAsFixed(0)} mil'
-          : '${(max * fraction).toStringAsFixed(0)}';
+          : (max * fraction).toStringAsFixed(0);
       final text = TextPainter(
         text: TextSpan(
           text: label,

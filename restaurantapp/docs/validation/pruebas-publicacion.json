@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-15",
+  "command": "flutter test --no-pub",
+  "exit": 0,
+  "nativePassed": 63,
+  "receiptId": "05926f5e4a4e4da58866cd742cf8475b",
+  "stdoutSha256": "a8d6923d9c8e0cfd36a4b20255e517934d0092eb62f5fecb63d3c02a1335d6a8",
+  "analysis": "No issues found; flutter analyze --no-pub",
+  "nativeIntegration": "integracion-movil.json"
+}

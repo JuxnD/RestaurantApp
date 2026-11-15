@@ -20,8 +20,8 @@ samples, guidance on mobile development, and a full API reference.
 
 La aplicación utiliza Spring Boot como fuente de autenticación y de datos para
 menú, pedidos y direcciones. El backend persiste esos datos en MySQL; Supabase
-no es el proveedor de esos flujos. La sección administrativa **Predicción IA**
-se conserva vacía hasta que se integre el nuevo modelo.
+no es el proveedor de esos flujos. Propietarios y administradores pueden abrir
+**Estadísticas → Predicción de demanda · IA** para consultar el modelo del backend.
 
 1. Inicie MySQL y verifique la conexión del backend a `restaurante_ing`.
 2. Desde `backend-spring-boot`, ejecute:
@@ -45,6 +45,29 @@ credenciales de base de datos en Flutter.
 
 Los precios del menú están en pesos colombianos (COP) como unidades enteras.
 El checkout Stripe los convierte a centavos COP al crear la sesión de pago.
+
+## Predicción de demanda
+
+Requiere el backend con `GET /api/admin/demand/report` y
+`POST /api/admin/demand/predict` del commit `da4637b` o posterior
+([PR del backend](https://github.com/Mauzg19/backend-spring-boot/pull/1)).
+Se reutilizan el cliente HTTP autenticado y la sesión JWT. El servidor permite
+la consulta a `ROLE_ADMIN` y `ROLE_RESTAURANT_OWNER`.
+
+El formulario carga cinco productos académicos y permite elegir fecha e ingresar
+ventas del día anterior, de hace siete días y promedio de los últimos siete días.
+Spring ejecuta los pesos de la red entrenada y Flutter muestra las unidades
+estimadas. El modelo utiliza datos sintéticos independientes de los pedidos del
+restaurante; cambiar la fecha no actualiza automáticamente la historia ingresada.
+
+La pantalla valida fecha y valores entre 0 y 10.000, limpia el resultado al cambiar
+las entradas y muestra errores de conexión, sesión o permisos. Una predicción
+nueva necesita conexión, aunque catálogo y pedidos guardados puedan consultarse
+sin ella. Las gráficas operativas de Estadísticas conservan su cálculo anterior.
+
+Validación: `flutter analyze --no-pub` y `flutter test --no-pub`.
+Consulta [la evidencia de integración](docs/validation/2026-11-15-prediccion.md)
+y [el contexto técnico](docs/context/INDEX.md) para conocer el alcance comprobado.
 
 ## Acceso biométrico
 
