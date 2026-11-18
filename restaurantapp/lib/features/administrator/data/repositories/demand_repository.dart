@@ -28,9 +28,10 @@ class DemandScenario {
 }
 
 class DemandReport {
-  DemandReport({required this.scenarios, required this.mae});
+  DemandReport({required this.scenarios, required this.mae, this.modelId});
   final List<DemandScenario> scenarios;
   final double mae;
+  final String? modelId;
   factory DemandReport.fromJson(Map<String, dynamic> json) {
     final scenarios = (json['examples'] as List)
         .map(
@@ -43,7 +44,11 @@ class DemandReport {
     if (scenarios.isEmpty || !mae.isFinite || mae < 0) {
       throw const FormatException('Informe de demanda inválido.');
     }
-    return DemandReport(scenarios: scenarios, mae: mae);
+    return DemandReport(
+      scenarios: scenarios,
+      mae: mae,
+      modelId: json['modelId'] as String?,
+    );
   }
 }
 

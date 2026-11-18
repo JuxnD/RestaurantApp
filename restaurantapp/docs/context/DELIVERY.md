@@ -1,5 +1,6 @@
 # Delivery
 ## Current state
+2026-11-18: integración del modelo v2 en Spring, React y Flutter; consultar la validación v2. Los videos anteriores muestran v1.
 2026-11-15: consulta de IA implementada y validada localmente en APK Android emulado. Video móvil entregado: 3:20, Full HD, versiones limpia y narrada con subtítulos, guía y ZIP editable; separado del video general V4. Cierre académico depende de aceptación del usuario/profesor.
 ## Risks and gates
 Modelo académico con datos sintéticos, independiente de ventas operativas. El alcance no incluye Stripe real ni teléfono físico; ambos fueron aplazados por el usuario. No aparecen como pendientes dentro del video. Resto de recorridos históricos no se recertifica con estos tests.

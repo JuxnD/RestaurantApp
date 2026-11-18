@@ -268,6 +268,7 @@ class _DemandPageState extends State<DemandPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              if (_report!.modelId != null) Text('Modelo ${_report!.modelId}'),
               Text(
                 'Error absoluto medio: ${_report!.mae.toStringAsFixed(2).replaceAll('.', ',')} unidades en prueba sintética.',
               ),

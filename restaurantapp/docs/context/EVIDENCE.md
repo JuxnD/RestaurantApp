@@ -1,4 +1,8 @@
 # Evidence ledger
+
+## Modelo v2 del 18/11/2026
+
+Ver [validación v2](../validation/2026-11-18-modelo-v2.md) e [integración](../validation/integracion-modelo-v2.json). Las entradas siguientes describen la evidencia histórica v1 del 15/11/2026.
 ## Claims
 Base app: fix/sustentacion-restaurant-fast, 559d13d06a1af541a7be0323b1a6bcd01b8fbfd8, base de la integración de IA publicada en el PR. Backend de referencia da4637bf7eeca6043de85af017de048a7d472ced.
 

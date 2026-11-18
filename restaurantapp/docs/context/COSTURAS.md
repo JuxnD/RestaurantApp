@@ -1,6 +1,6 @@
 # Costuras de la consulta móvil de IA
 ## Parámetros de verificación
-Artefacto: APK SHA en EVIDENCE.md. Entorno: emulador Android 35 x86_64, emulator-5570, API demo 15454 y datos sintéticos. Recorrido crítico: propietario → Estadísticas → Predicción → enviar escenario Hamburguesa 2026-09-01, 38/40/65.71428571428571 → 45.27. Resultado esperado independiente: informe del modelo del backend. Autoridad: usuario autorizó integrar IA y generar video; sin publicación externa.
+Artefacto v2: compilación Android y prueba nativa descritas en ../validation/2026-11-18-modelo-v2.md. El APK histórico SHA en EVIDENCE.md corresponde a v1. Entorno: emulador Android 35 x86_64, emulator-5570, API demo 15454 y datos sintéticos. Recorrido crítico: propietario → Estadísticas → Predicción → enviar escenario Hamburguesa 2026-09-01, 38/40/65.71428571428571 → 49.58. Resultado esperado independiente: exportación Keras v2 congelada y predicciones de prueba del entrenamiento. Autoridad: usuario autorizó integrar IA y generar video; sin publicación externa.
 
 Comandos: flutter test --no-pub; python verificar_api.py en video-movil-20261115 con demo activa. Prueba nativa: abrir ruta, enviar escenario, retirar solo adb reverse del puerto demo, verificar error, restaurar y reintentar. Control negativo numérico +10 registrado en EVIDENCE.md.
 ## Inventario

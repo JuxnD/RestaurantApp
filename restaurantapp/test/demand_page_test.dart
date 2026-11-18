@@ -18,6 +18,7 @@ class FakeDemandHttp extends HttpClientService {
     lastUrl = url;
     if (fail) throw const NetworkUnavailableException();
     return {
+      'modelId': 'demanda-mlp-v2-seed42',
       'examples': malformed
           ? []
           : [
@@ -41,7 +42,7 @@ class FakeDemandHttp extends HttpClientService {
               },
             ],
       'metrics': {
-        'Red neuronal': {'MAE': 3.171572208404541},
+        'Red neuronal': {'MAE': 3.050386428833008},
       },
     };
   }
@@ -59,7 +60,7 @@ class FakeDemandHttp extends HttpClientService {
     return {
       'product': body['product'],
       'date': body['date'],
-      'units': 45.27287608318317,
+      'units': 49.577291514433696,
     };
   }
 }
@@ -91,6 +92,12 @@ void main() {
       final client = FakeDemandHttp();
       await open(t, client);
       await predict(t);
+      await t.scrollUntilVisible(
+        find.text('Modelo demanda-mlp-v2-seed42'),
+        100,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(find.text('Modelo demanda-mlp-v2-seed42'), findsOneWidget);
       expect(client.lastUrl, endsWith('/api/admin/demand/predict'));
       expect(client.lastBody, {
         'product': 'Hamburguesa',
@@ -100,7 +107,7 @@ void main() {
         'mean7': 65.71428571428571,
       });
       await t.ensureVisible(find.byKey(const Key('demand-result')));
-      expect(find.text('45,27 unidades estimadas'), findsOneWidget);
+      expect(find.text('49,58 unidades estimadas'), findsOneWidget);
       expect(t.takeException(), isNull);
       await t.enterText(
         find.widgetWithText(TextFormField, 'Unidades del día anterior'),
@@ -141,7 +148,7 @@ void main() {
       expect(find.textContaining('Sin conexión.'), findsOneWidget);
       client.fail = false;
       await predict(t);
-      expect(find.text('45,27 unidades estimadas'), findsOneWidget);
+      expect(find.text('49,58 unidades estimadas'), findsOneWidget);
     },
   );
   testWidgets('empty report is an error, retry reloads real options', (
